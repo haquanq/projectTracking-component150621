@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Barlow+Condensed:wght@400;700&display=swap');
+
+$Red: hsl(0, 100%, 68%);
+$Very_Dark_Blue: hsl(230, 29%, 20%);
+$Dark_Grayish_Blue: hsl(230, 11%, 40%);
+$Grayish_Blue: hsl(231, 7%, 65%);
+$Light_Grayish_Blue: hsl(207, 33%, 95%);
+
+$Barlow: 400 1em "Barlow", sans-serif;
+$BC_Bold: 700 1em "Barlow Condensed", sans-serif;
+$BC_Light: 400 1em "Barlow Condensed", sans-serif;
+
+@mixin Width {
+    max-width: 1110px; min-width: 315px;
+    width: 85%;
+}
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0; margin: 0;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%; height: 800px;
+    > img {
+        top: 215px;
+        right: -260px;
+        position: absolute;
+    }
+}
+
+.head {
+    @include Width;
+    &__nav {
+        margin-top: 62px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 378px;
+            a {
+                position: relative;
+                font: $BC_Bold;
+                color: $Very_Dark_Blue;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            > a:last-child {
+                color: $Grayish_Blue;
+            }
+            > a:last-child::before, 
+            > a:last-child::after {
+                background: $Grayish_Blue;
+            }
+            > a::before {
+                position: absolute;
+                display: flex;
+                justify-content: flex-end;
+                content: "";
+                bottom: 0;
+                right: 50%;
+                height: 2px;
+                width: 0%;
+                background: $Very_Dark_Blue;
+                transition: 150ms ease-in;
+            }
+            > a::after {
+                position: absolute;
+                content: "";
+                bottom: 0;
+                left: 50%; right: 0;
+                height: 2px;
+                width: 0%;
+                background: $Very_Dark_Blue;
+                transition: 150ms ease-in;
+            }
+            > a:hover::before,
+            > a:hover::after {
+                width: 50%;
+            }
+            span {
+                width: 6px; height: 6px;
+                border-radius: 100%;
+                background-color: lighten($Grayish_Blue, 20);
+            }
+        }
+        &__ham {
+            position: relative; z-index: 10;
+            display: none;
+            transition: 250ms ease-in-out;
+            > span {
+                display: block;
+                margin: 5px 0;
+                width: 25px; height: 2px;
+                background: $Very_Dark_Blue;
+                transition: 250ms ease-in-out;
+            }
+        }
+    }
+    &__intro {
+        margin-top: 160px;
+        > div:first-child {
+            display: flex;
+            align-items: center;
+            p {
+                text-transform: uppercase;
+            }
+            > p:first-child {
+                border-radius: 40px;
+                @include flexCenter;
+                font: $BC_Bold;
+                font-size: 0.7777em;
+                width: 47px; height: 25px;
+                background: $Very_Dark_Blue;
+                color: $Light_Grayish_Blue;
+                margin-right: 15px;
+            }
+            > p:last-child {
+                color: $Grayish_Blue;
+                font: $BC_Light;
+                font-size: 0.888em;
+                letter-spacing: 4px;
+            }
+        }
+        > h1 {
+            color: $Very_Dark_Blue;
+            margin: 15px 0 35px 0;
+            font: $BC_Bold;
+            text-transform: uppercase;
+            font-size: 3.444em;
+            line-height: 1;
+        }
+        > p {
+            width: 27ch;
+            color: $Dark_Grayish_Blue;
+            font: $Barlow;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+        > div:last-child {
+            margin-top: 65px;
+            display: flex;
+            align-items: center;
+            > button {
+                letter-spacing: 1px;
+                color: white;
+                text-transform: uppercase;
+                font: $BC_Bold;
+                font-size: 0.944em;
+                margin-right: 20px;
+                border: none;
+                background: $Red;
+                width: 185px; height: 50px;
+                transition: 200ms ease;
+                cursor: pointer;
+            }
+            > button:hover {
+                border-radius: 10px;
+                background: lighten($Red, 5);
+            }
+            > P {
+                text-transform: uppercase;
+                font: $BC_Light;
+                font-size: 1em;
+                letter-spacing: 5px;
+                color: $Grayish_Blue;
+            }
+        }
+    }
+}
+
+.head__nav__ham.open {
+    transform: translateX(5px);
+    > span:nth-child(1) {
+        transform: rotate(45deg) translateY(10px);
+    }
+    > span:nth-child(2) {
+        opacity: 0;
+    }
+    > span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-10px);
+    }
+}
+
+.head_back {
+    position: absolute; z-index: -1;
+    top: 0; right: 0;
+    max-width: 705px; min-width: 113px;
+    width: 60%; height: 425px;
+    border-radius: 0 0 0 100px;
+    background: $Light_Grayish_Blue;
+}
+
+.navmenu {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 0;
+    display: none;
+    justify-content: center;
+    background: rgba(black, 0.05);
+    transition: 400ms ease;
+    &__container {
+        display: none; opacity: 0;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        padding: 0 20px;
+        background: white;
+        margin-top: 94px;
+        @include Width;
+        height: max-content;
+        transition: 300ms ease;
+        > div {
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            a {
+                color: $Very_Dark_Blue;
+                text-transform: uppercase;
+                font: $BC_Bold;
+                font-size: 1.222em;
+                margin: 10px;
+                letter-spacing: 1px;
+            }
+        }
+        > a {
+            padding: 20px 0;
+            border-top: 1px solid lighten($Grayish_Blue, 10) ;
+            display: flex;
+            justify-content: center;
+            text-transform: uppercase;
+            font: $BC_Bold;
+            font-size: 1.222em;
+            letter-spacing: 1px;
+            color: $Grayish_Blue;
+
+        }
+    }
+}
+
+@media screen and (max-width: 1200px){
+    header {
+        > img {
+            right: -480px;
+        }
+    }
+    .head_back {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .head__nav {
+        margin-top: 37px;
+    }
+    .head__intro {
+        margin-top: 150px;
+        > h1 {
+            font-size: 3em;
+            width: 10ch;
+        }
+    }
+}
+
+@media screen and (max-width: 800px){
+    header {
+        > img {
+            top: 110px;
+            right: 50%;
+            transform: translateX(50%);
+            height: 250px;
+        }
+    }
+    .head__intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 385px;
+        > h1 {
+            margin: 15px 0;
+            text-align: center;
+            font-size: 3em;
+            width: initial;
+        } 
+        > p{
+            text-align: center;
+        }
+        > div:last-child {
+            margin-top: 50px;
+        }
+    }
+}
+@media screen and (max-width: 768px){
+    .head__nav {
+        > img {
+            height: 25px;
+            object-fit: cover;
+        }
+    }
+    .head__nav__link {
+        display: none;
+    }
+    .head__nav__ham {
+        display: initial;
+    }
+}
+
+@media screen and (max-width: 520px){
+    header {
+        > img {
+            top: 110px;
+            right: -140px;
+            transform: initial;
+            height: 245px;
+        }
+    }
+    .head__intro {
+        flex-direction: column;
+        align-items: initial;
+        > h1 {
+            text-align: initial;
+            font-size: 2.22em;
+        } 
+        > p{
+            text-align: initial;
+        }
+        > div:last-child {
+            margin-top: 35px;
+            button {
+                font-size: 0.777em;
+                width: 152px; height: 41px;
+            }
+            p {
+                letter-spacing: 2px;
+                font-size: 0.888em;
+            }
+        }
+    }
+
+}
